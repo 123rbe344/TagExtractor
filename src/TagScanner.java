@@ -3,7 +3,6 @@ import java.nio.file.*;
 import java.util.*;
 public class TagScanner
 {
-    // Loads the stop word file (one word per line) into a sorted set
     public static Set<String> loadStopWords(Path stopFile) throws IOException
     {
         Set<String> stopWords = new TreeSet<>();
@@ -21,7 +20,6 @@ public class TagScanner
         }
         return stopWords;
     }
-    // Scans the text file and counts every word that is not a stop word
     public static Map<String, Integer> extractTags(Path textFile, Set<String> stopWords) throws IOException
     {
         Map<String, Integer> tags = new TreeMap<>();
@@ -30,7 +28,6 @@ public class TagScanner
             String line;
             while ((line = reader.readLine()) != null)
             {
-                // split on whitespace and dashes so "said—and" becomes two words
                 String[] words = line.split("[\\s\\-—–]+");
                 for (String raw : words)
                 {
@@ -45,7 +42,6 @@ public class TagScanner
         }
         return tags;
     }
-    // Returns the tags ordered by frequency (highest first), ties broken alphabetically
     public static List<Map.Entry<String, Integer>> sortByFrequency(Map<String, Integer> tags)
     {
         List<Map.Entry<String, Integer>> entries = new ArrayList<>(tags.entrySet());
@@ -54,7 +50,6 @@ public class TagScanner
                 : b.getValue() - a.getValue());
         return entries;
     }
-    // Builds the text shown in the text area and written to the output file
     public static String formatTags(Map<String, Integer> tags)
     {
         StringBuilder sb = new StringBuilder();

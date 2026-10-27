@@ -11,7 +11,6 @@ public class TagExtractorRunner
             }
             catch (Exception ex)
             {
-                // fall back to the default look and feel
             }
             TagExtractorFrame frame = new TagExtractorFrame();
             frame.setTitle("Tag / Keyword Extractor");
